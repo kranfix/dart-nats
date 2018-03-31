@@ -1,16 +1,15 @@
-import 'dart:html' show Url;
-
 class Server {
-  Url url;
+  Uri uri;
   bool didConnect;
   int reconnects;
 
-  Server(this.url){
+  Server(String url){
+    uri = Uri.parse(url);
     this.didConnect = false;
     this.reconnects = 0;
   }
 
   String toString(){
-    return this.url.href;
+    return this.uri.toString();
   }
 }
