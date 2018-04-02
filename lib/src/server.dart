@@ -1,12 +1,12 @@
-class Server {
+class Srv {
   Uri uri;
   bool didConnect;
-  int reconnects;
+  bool discovered = false;
+  int reconnects = 0;
+  var lastAttempt = null;
 
-  Server(String url){
-    uri = Uri.parse(url);
-    this.didConnect = false;
-    this.reconnects = 0;
+  Srv(String uri){
+    this.uri = Uri.parse(uri);
   }
 
   String toString(){
