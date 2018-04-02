@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:nuid/nuid.dart';
 
 const MSG = r"^MSG\s+([^\s\r\n]+)\s+([^\s\r\n]+)\s+(([^\s\r\n]+)[^\S\r\n]+)?(\d+)\r\n",
   OK = "^\+OK\s*\r\n",
@@ -13,15 +14,15 @@ const MSG = r"^MSG\s+([^\s\r\n]+)\s+([^\s\r\n]+)\s+(([^\s\r\n]+)[^\S\r\n]+)?(\d+
   CR_LF = '\r\n',
   CR_LF_LEN = CR_LF.length;
 
+String createInbox() => "_INBOX."+nuid.next();
+
 class Msg {
   String subject;
-  String reply;
   Uint8List data;
+  int sid = 0;
+  String reply;
 
-
-  Msg(this.subject, this.data, [this.reply]){
-
-  }
+  Msg(this.subject, this.data, this.sid, [this.reply]);
 
   static String pub(String subject, String payload, [String replyTo]){
     if(payload == null){
